@@ -1,0 +1,26 @@
+<resources>
+
+    <style name="Base.Theme.HitBlow" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorAccent">@color/keypad_action_button</item>
+
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
+
+        <!-- 標準ボタンのスタイル設定 -->
+        <item name="buttonStyle">@style/ColoredButtonTheme</item>
+
+        <!--
+        【ポイント】テーマレベルでbackgroundTintを指定せず、
+        各ボタンのstyle（styles.xml）側に任せることで柔軟な色分けを可能にします。
+        -->
+
+        <item name="alertDialogTheme">@style/CustomAlertDialogTheme</item>
+    </style>
+
+    <style name="Theme.HitBlow" parent="Base.Theme.HitBlow" />
+
+    <style name="CustomAlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/keypad_action_button</item>
+    </style>
+</resources>

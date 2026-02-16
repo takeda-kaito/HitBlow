@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+    汎用的な矩形（四角形）の形状定義
+    カードの背景や入力プレビューの枠組みなどに使用します。
+    -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!--
+    塗りつぶしの色設定
+    落ち着いたダークグレー（#2C2C2C）を指定し、上に載る白い文字の視認性を高めています。
+    -->
+    <solid android:color="#2C2C2C" />
+
+    <!--
+    角の丸み設定
+    半径8dpの丸みを付けることで、柔らかく洗練されたデザインに仕上げています。
+    -->
+    <corners android:radius="8dp" />
+
+    <!--
+    内側の余白（パディング）設定
+    この背景を持つビュー（TextViewなど）の中身が、枠線ギリギリにならないよう
+    全方向に8dpのスペースを確保しています。
+    -->
+    <padding
+        android:left="8dp"
+        android:top="8dp"
+        android:right="8dp"
+        android:bottom="8dp" />
+</shape>

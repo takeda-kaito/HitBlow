@@ -1,0 +1,26 @@
+<resources>
+    <!-- 数字キーパッド（0-9）の基本スタイル -->
+    <style name="GameKeypadButton" parent="Widget.AppCompat.Button">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <!-- 背景色をcolors.xmlで定義したキーパッド用グレーに設定 -->
+        <item name="backgroundTint">@color/keypad_button</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <!--
+    アクションボタン（コール、削除）のスタイル
+    -->
+    <style name="GameActionKeyButton" parent="GameKeypadButton">
+        <item name="android:textSize">20sp</item>
+        <item name="backgroundTint">@color/keypad_action_button</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- カラーボタンのテーマ設定（主にメインメニュー等で使用） -->
+    <style name="ColoredButtonTheme" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/purple_500</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+</resources>

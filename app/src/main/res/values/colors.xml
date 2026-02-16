@@ -1,0 +1,38 @@
+<resources>
+    <!--
+    標準のテーマカラー（パープル系）
+    Androidのプロジェクト生成時にデフォルトで作成される基本色です。
+    -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+
+    <!--
+    アクセントカラー（ティール系）
+    ボタンの選択状態やプログレスバーなどに使用される補色です。
+    -->
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+    <!--
+    基本色（ブラック・ホワイト）
+    -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--
+    ゲーム画面専用のカスタムカラー
+    背景色やキーパッドボタンなど、Hit＆BlowのUIデザインに最適化された色定義です。
+    -->
+    <!-- ダークテーマ用の背景色 -->
+    <color name="dark_background">#121212</color>
+
+    <!-- 補助的なテキストや枠線に使用するグレー -->
+    <color name="light_gray">#AAAAAA</color>
+
+    <!-- キーパッドの数字ボタン用（濃いグレー） -->
+    <color name="keypad_button">#404040</color>
+
+    <!-- コールや削除などのアクションボタン用（鮮やかなブルー） -->
+    <color name="keypad_action_button">#007AFF</color>
+</resources>

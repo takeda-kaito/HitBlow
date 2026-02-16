@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".view.ModeSelectActivity">
+
+    <!--
+    モード選択ボタンエリア：3桁・4桁・5桁の各難易度ボタンを配置
+    ConstraintLayoutの中央付近（bias 0.45）に配置し、バランスを整えています。
+    -->
+    <LinearLayout
+        android:id="@+id/mode_button_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_text_area"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45">
+
+        <!-- 3桁モード選択ボタン -->
+        <Button
+            android:id="@+id/button_mode_3"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="24dp"
+            android:text="3桁モード"
+            android:textSize="16sp" />
+
+        <!-- 4桁モード選択ボタン -->
+        <Button
+            android:id="@+id/button_mode_4"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="24dp"
+            android:text="4桁モード"
+            android:textSize="16sp" />
+
+        <!-- 5桁モード選択ボタン -->
+        <Button
+            android:id="@+id/button_mode_5"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="24dp"
+            android:text="5桁モード"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <!--
+    タイトル表示エリア：画面上部でユーザーに操作を促すテキスト
+    ボタンエリア（mode_button_area）の上部に配置されるよう制約を設定しています。
+    -->
+    <LinearLayout
+        android:id="@+id/title_text_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/mode_button_area"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/mode_select_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ゲームモードを選択してください"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

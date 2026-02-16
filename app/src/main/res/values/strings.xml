@@ -1,0 +1,8 @@
+<resources>
+    <!--
+    アプリ名：ランチャー（ホーム画面）やツールバーに表示される名称。
+    特殊文字の「&」はXMLの構文上、エスケープ文字「&」として記述します。
+    -->
+    <string name="app_name">Hit＆Blow</string>
+
+</resources>

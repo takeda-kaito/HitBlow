@@ -1,0 +1,14 @@
+<resources>
+    <!--
+    数字カードの横幅
+    CPUの正解やプレイヤーの回答を表示するカードのサイズを定義します。
+    一箇所で管理することで、全画面のカードサイズを一括変更可能です。
+    -->
+    <dimen name="card_width">40dp</dimen>
+
+    <!--
+    カード間の余白
+    カードが横に並ぶ際の間隔を定義します。
+    -->
+    <dimen name="card_margin">4dp</dimen>
+</resources>

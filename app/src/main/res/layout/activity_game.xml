@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".view.GameActivity">
+
+    <!--
+    最上部エリア：ホーム戻るボタンなどを配置
+    -->
+    <LinearLayout
+        android:id="@+id/top_area_layout"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/button_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/keypad_action_button"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="HOME"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!--
+    正解カード表示エリア：CPUの数字（正解）が伏せられた状態で並ぶ場所
+    Java側から動的にTextViewが追加されます。
+    -->
+    <LinearLayout
+        android:id="@+id/card_area_layout"
+        android:layout_width="0dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_area_layout">
+
+        <LinearLayout
+            android:id="@+id/number_cards_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" />
+    </LinearLayout>
+
+    <!--
+    操作・入力エリア（下部固定）：キーパッドとゲームオーバー画面の切り替え
+    -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/number_area_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_area_layout">
+
+        <!--
+        数字キーパッド：プレイヤーが推測した数字を入力するためのパネル
+        -->
+        <LinearLayout
+            android:id="@+id/input_keypad_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
+
+            <!-- 現在の入力状況（プレビュー） -->
+            <TextView
+                android:id="@+id/number_input_display"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="#606060"
+                android:gravity="center"
+                android:letterSpacing="0.15"
+                android:minHeight="60dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:textColor="@android:color/white"
+                android:textSize="48sp"
+                android:textStyle="bold"
+                tools:text="---" />
+
+            <!-- 0-9のボタンが並ぶグリッド。ガイドラインを使用して均等配置 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/keypad_grid_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_v20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.2" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_v40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.4" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_v60"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.6" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_v80"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.8" />
+
+                <Button
+                    android:id="@+id/key_0"
+                    style="@style/GameKeypadButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="0"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_v20"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- ...1から9までのボタン定義（中略）... -->
+                <!-- 実際にはkey_1からkey_9まで同様の設定が続きます -->
+
+                <Button
+                    android:id="@+id/key_1"
+                    style="@style/GameKeypadButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="1"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_v40"
+                    app:layout_constraintStart_toEndOf="@id/guideline_v20"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/key_2"
+                    style="@style/GameKeypadButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="2"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_v60"
+                    app:layout_constraintStart_toEndOf="@id/guideline_v40"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/key_3"
+                    style="@style/GameKeypadButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="3"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_v80"
+                    app:layout_constraintStart_toEndOf="@id/guideline_v60"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/key_4"
+                    style="@style/GameKeypadButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="4"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline_v80"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/key_5"
+                    style="@style/GameKeypadButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="5"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_v20"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/key_0" />
+
+                <Button
+                    android:id="@+id/key_6"
+                    style="@style/GameKeypadButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="6"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_v40"
+                    app:layout_constraintStart_toEndOf="@id/guideline_v20"
+                    app:layout_constraintTop_toBottomOf="@id/key_1" />
+
+                <Button
+                    android:id="@+id/key_7"
+                    style="@style/GameKeypadButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="7"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_v60"
+                    app:layout_constraintStart_toEndOf="@id/guideline_v40"
+                    app:layout_constraintTop_toBottomOf="@id/key_2" />
+
+                <Button
+                    android:id="@+id/key_8"
+                    style="@style/GameKeypadButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="8"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_v80"
+                    app:layout_constraintStart_toEndOf="@id/guideline_v60"
+                    app:layout_constraintTop_toBottomOf="@id/key_3" />
+
+                <Button
+                    android:id="@+id/key_9"
+                    style="@style/GameKeypadButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="9"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline_v80"
+                    app:layout_constraintTop_toBottomOf="@id/key_4" />
+
+                <!-- コールボタン：条件を満たした時のみ表示 -->
+                <Button
+                    android:id="@+id/key_call"
+                    style="@style/GameActionKeyButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="コール"
+                    android:visibility="gone"
+                    app:layout_constraintDimensionRatio="3:1"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_v60"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/key_5"
+                    tools:visibility="visible" />
+
+                <!-- スペーサー：コールボタン非表示の際にレイアウト崩れを防ぐ -->
+                <Space
+                    android:id="@+id/spacer_for_delete"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="visible"
+                    app:layout_constraintDimensionRatio="3:1"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_v60"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/key_5"
+                    tools:visibility="gone" />
+
+                <!-- 削除ボタン（一文字消去） -->
+                <Button
+                    android:id="@+id/key_delete"
+                    style="@style/GameActionKeyButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="←"
+                    app:layout_constraintDimensionRatio="2:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@id/guideline_v60"
+                    app:layout_constraintTop_toBottomOf="@id/key_8" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <!--
+        ゲームオーバー時ボタン：リスタートやメインメニューへのボタン
+        初期状態は非表示(gone)
+        -->
+        <LinearLayout
+            android:id="@+id/game_over_buttons_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone">
+
+            <Button
+                android:id="@+id/button_restart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="もう一度遊ぶ"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/button_main_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="メインメニューに戻る"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--
+    中央リストエリア：現在のステータス(ターン/時間)と回答履歴を表示
+    -->
+    <LinearLayout
+        android:id="@+id/list_area_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/number_area_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_area_layout">
+
+        <!-- ステータス（ターンとタイマー） -->
+        <LinearLayout
+            android:id="@+id/status_bar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/turn_count_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="TURN: 0"
+                android:textColor="@android:color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/timer_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="TIME: 00:00"
+                android:textColor="@android:color/black"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <!-- 履歴テーブルの枠と見出し -->
+        <LinearLayout
+            android:id="@+id/history_outer_border"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <ScrollView
+                android:id="@+id/history_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- 履歴の見出し(ヘッダー) -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginEnd="1dp"
+                        android:background="#DDDDDD"
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="Number"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#AAAAAA" />
+
+                        <TextView
+                            android:id="@+id/eat_header"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="EAT"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#AAAAAA" />
+
+                        <TextView
+                            android:id="@+id/bite_header"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="BITE"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- 判定履歴がJavaから1行ずつ追加されるコンテナ -->
+                    <LinearLayout
+                        android:id="@+id/history_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--
+    結果演出オーバーレイ：EAT/BITE判定時に画面中央に浮かび上がる
+    -->
+    <TextView
+        android:id="@+id/call_result_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FF333333"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+</androidx.constraintlayout.widget.ConstraintLayout>
