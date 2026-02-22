@@ -6,7 +6,7 @@ JavaとAndroid SDKを使用し、MVP（Model-View-Presenter）アーキテクチ
 ## 主な機能
 
 - **シングルプレイヤーモード**: CPUが生成したランダムな数字を推測。
-- **動的な難易度設定**: 3桁、4桁、5桁から選択可能。
+- **難易度設定**: 3桁、4桁、5桁から選択可能。
 - **入力プレビュー機能**: キーパッド入力に合わせてリアルタイムで数字を表示。
 - **判定履歴リスト**: 過去の回答と「EAT（場所も数字も一致）」「BITE（数字は合っているが場所が違う）」の履歴を表示。
 
@@ -20,10 +20,9 @@ JavaとAndroid SDKを使用し、MVP（Model-View-Presenter）アーキテクチ
 
 ## 使用技術
 
-- **Language**: Java
-- **Architecture**: MVP (Model-View-Presenter)
-- **UI**: ConstraintLayout, XML Drawables, Styles/Themes
-- **Tools**: Android Studio, Git/GitHub
+- **バックエンド**: Java / Android SDK
+- **フロントエンド**: XML (Layout / Drawable / Styles)
+- **ツール**: Android Studio / Git / GitHub
 
 ## プロジェクト構成（主要部分）
 
